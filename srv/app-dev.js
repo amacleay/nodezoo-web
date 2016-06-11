@@ -7,6 +7,7 @@ require('..')(
   },
   fail,
   function(server){
+    "use strict";
     server.seneca
       .repl(43000)
       .listen(44000)
@@ -24,6 +25,10 @@ require('..')(
           version:'0.0.0'
         }})
       })
+
+	  .add('role:web,cmd:ping', (msg, done) => {
+		  done(null, {timestamp: Date.now()});
+	  })
 
     .ready(function(){
       server.seneca.log.info('hapi',server.info)
